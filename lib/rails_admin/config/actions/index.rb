@@ -77,9 +77,9 @@ module RailsAdmin
                             type: "text/csv; charset=#{encoding}; #{'header=present' if header}",
                             disposition: "attachment; filename=#{params[:model_name]}_#{DateTime.now.strftime('%Y-%m-%d_%Hh%Mm%S')}.csv"
                 elsif Rails.version.to_s >= '5'
-                  render plain: output
+                  render stream: true, plain: output
                 else
-                  render text: output
+                  render stream: true, text: output
                 end
               end
             end
